@@ -12,9 +12,10 @@ async function bootstrap() {
 
   // Enable CORS so your React app can call the API
   app.enableCors({
-    origin: 'https://bibleec.vercel.app/',  // Replace with your frontend URL
+    origin: 'https://bibleec.vercel.app',  // Replace with your frontend URL
     methods: 'GET,POST,DELETE',      // Allow appropriate methods
     allowedHeaders: 'Content-Type, Authorization',  // Allow the Authorization header
+    credentials: true,
   });
 
   // Serve the uploads folder under the /uploads route
