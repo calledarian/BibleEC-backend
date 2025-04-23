@@ -3,10 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as path from 'path';
 
-
 @Module({
-
-
     imports: [
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
@@ -21,12 +18,13 @@ import * as path from 'path';
                 entities: [path.resolve(__dirname, '..', '**', '*.entity.{ts,js}')],
                 synchronize: true,
                 autoLoadEntities: true,
+                extra: {
+                    ssl: {
+                        rejectUnauthorized: false, // Optional: bypass certificate verification, if needed.
+                    },
+                },
             }),
-
         }),
-
     ],
 })
-
-
 export class DatabaseModule { }
