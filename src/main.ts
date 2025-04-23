@@ -12,7 +12,7 @@ async function bootstrap() {
 
   // Enable CORS so your React app can call the API
   app.enableCors({
-    origin: 'http://localhost:3001',  // Replace with your frontend URL
+    origin: 'https://bibleec-backend.onrender.com',  // Replace with your frontend URL
     methods: 'GET,POST,DELETE',      // Allow appropriate methods
     allowedHeaders: 'Content-Type, Authorization',  // Allow the Authorization header
   });
