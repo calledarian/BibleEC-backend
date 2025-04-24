@@ -5,6 +5,7 @@ import { Event } from 'src/entity/event.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CloudinaryModule } from 'src/lib/cloudinary.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
                 signOptions: { expiresIn: '0.5h' },
             }),
         }),
+        CloudinaryModule, // ✅ This is the important part
     ],
     controllers: [EventController],
     providers: [EventService],
