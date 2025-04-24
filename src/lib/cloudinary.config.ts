@@ -1,7 +1,7 @@
-// cloudinary.service.ts
+import * as streamifier from 'streamifier';
+import { v2 as cloudinary, UploadApiResponse } from 'cloudinary';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { v2 as cloudinary } from 'cloudinary';
 
 @Injectable()
 export class CloudinaryService {
@@ -13,11 +13,20 @@ export class CloudinaryService {
         });
     }
 
-    // Example method: Upload file
-    async uploadImage(path: string): Promise<string> {
-        const result = await cloudinary.uploader.upload(path, {
-            folder: 'events',
+    async uploadImage(file: Express.Multer.File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+                { folder: 'events' },
+                (error, result: UploadApiResponse | undefined) => {
+                    if (error || !result) {
+                        reject(error || new Error('Upload failed with unknown error'));
+                    } else {
+                        resolve(result.secure_url);
+                    }
+                }
+            );
+
+            streamifier.createReadStream(file.buffer).pipe(stream);
         });
-        return result.secure_url;
     }
 }
