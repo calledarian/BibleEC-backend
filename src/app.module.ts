@@ -25,6 +25,10 @@ import { AuthModule } from './auth/auth.module';
         JWT_SECRET: Joi.string().required(),
         adminUsername: Joi.string().required(),
         adminPasswordHash: Joi.string().required(),
+        CLOUDINARY_CLOUD_NAME: Joi.string().required(),
+        CLOUDINARY_API_KEY: Joi.string().required(),
+        CLOUDINARY_API_SECRET: Joi.string().required(),
+
       }),
       envFilePath: '.env',
     }),

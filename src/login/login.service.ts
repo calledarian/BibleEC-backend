@@ -11,7 +11,7 @@ export class LoginService {
     private readonly blacklistedTokens = new Set<string>();
 
     private failedAttemptsByIP = new Map<string, { count: number; lastAttempt: number }>();
-    private readonly MAX_ATTEMPTS = 5;
+    private readonly MAX_ATTEMPTS = 10;
     private readonly COOLDOWN_MS = 5 * 60 * 1000; // 5 minutes
 
     constructor(private configService: ConfigService) {
