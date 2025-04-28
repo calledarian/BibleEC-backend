@@ -9,6 +9,10 @@ export class LoginService {
     private readonly adminPasswordHash: string;
     private readonly jwtSecretKey: string;
     private readonly blacklistedTokens = new Set<string>();
+    /**
+     * abc => { name: adam, age 19 }
+     * somemap.get(abc)
+     */
 
     private failedAttemptsByIP = new Map<string, { count: number; lastAttempt: number }>();
     private readonly MAX_ATTEMPTS = 10;

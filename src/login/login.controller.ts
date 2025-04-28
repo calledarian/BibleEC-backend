@@ -12,11 +12,11 @@ import { LoginService } from './login.service';
 import { LoginDto } from 'src/dto/login.dto';
 import { Response, Request } from 'express';
 
-@Controller('auth')
+@Controller('/auth')
 export class LoginController {
     constructor(private readonly loginService: LoginService) { }
 
-    @Post('login')
+    @Post('/login')
     async login(
         @Req() req: Request,
         @Body() loginDto: LoginDto,
@@ -41,7 +41,7 @@ export class LoginController {
         return res.json({ token });
     }
 
-    @Get('check')
+    @Get('/check')
     checkAuth(@Headers('authorization') auth: string) {
         if (!auth?.startsWith('Bearer ')) throw new UnauthorizedException();
         const token = auth.split(' ')[1];
@@ -52,7 +52,7 @@ export class LoginController {
         return { message: 'You are authenticated' };
     }
 
-    @Post('logout')
+    @Post('/logout')
     logout(@Headers('authorization') auth: string) {
         if (!auth?.startsWith('Bearer ')) throw new UnauthorizedException();
         const token = auth.split(' ')[1];
