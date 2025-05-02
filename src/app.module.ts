@@ -6,6 +6,9 @@ import { DatabaseModule } from './lib/DatabaseModule';
 import { EventModule } from './event/event.module';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
+import { ThrottlerConfig } from './throttler.config';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -13,9 +16,16 @@ import { AuthModule } from './auth/auth.module';
     DatabaseModule,
     EventModule,
     LoginModule,
+    ThrottlerConfig,
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule { }

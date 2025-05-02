@@ -15,7 +15,7 @@ import { Event } from 'src/entity/event.entity';
 import { AuthGuard } from 'src/auth/auth.guard'; // Import your AuthGuard
 import { CloudinaryService } from 'src/lib/cloudinary.config';
 
-@Controller('event')
+@Controller('/event')
 export class EventController {
     constructor(
         private readonly eventService: EventService,
